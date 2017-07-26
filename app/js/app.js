@@ -29,17 +29,17 @@ var app = angular.module('myapp', ['ngResource']);
 		 	       $scope.update = function()	
 		 	       {
                       alert("updating the existing record successfully");
-		 	       	  var updateinternship = Entrydetails.get({id:$scope.id});
+		 	       	  var updateinternship = Entrydetails.get({internship:$scope.id});
 		 	       	  console.log(updateinternship);
-		 	       	  updateinternship.internship_title = $scope.studentinternships.internship_title;
-		 	       	  updateinternship.description = $scope.studentinternship.internship_description;
+		 	       	  updateinternship.internship_title = $scope.studentinternship.internship_title;
+		 	       	  updateinternship.internship_description = $scope.studentinternship.internship_description;
 		 	       	  console.log(updateinternship);
-		 	       	  /*updateinternship.$update({ id:$scope.id }) ;*/
+		 	       	  updateinternship.$update({ internship:$scope.id }) ;
 		 	       };
 	
 	                 $scope.post = function()
 	                 {
-	                     //echo "post function is called";
+	                     
 	                     alert("creating the new record successfully");
 	                 	 var postinternship = new Entrydetails();
 	                 	 postinternship.internship_title = $scope.internship_title;
@@ -49,12 +49,15 @@ var app = angular.module('myapp', ['ngResource']);
 	                 };
 	
 	
-	                 $scope.deleteinternship =  function()
+	                 $scope.deleteinternship =  function(id)
 	                 {
-	                 	console.log("deleting the internship");
-	                 	/*Entrydetails.delete({id:$scope.id},function() {
-		 			    alert("comment delete request sent");
-		 		      })*/
+	                 	$scope.id = id;
+                        $scope.delete = function() {
+	                 	Entrydetails.delete({internship:$scope.id},function() 
+	                 	 {
+		 			         window.location.reload();
+	                     })
+	                   }			
 	                 };
 	
 	                $scope.fetchAll = function()
