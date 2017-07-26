@@ -29,7 +29,7 @@ class internshipController extends Controller
 
     public function update(Request $request, $id)
     {
-        $internship = Internship::find('$id');
+        $internship = Internship::find($id);
         $internship ->internship_title =$request->input('internship_title');
         $internship ->internship_description = $request ->input('internship_description');
         $internship->save();
@@ -38,10 +38,9 @@ class internshipController extends Controller
 
     public function destroy($id)
     {
-        $internship = Internship::find('$id');  
+        $internship = Internship::find($id);  
         $internship->delete();
         return "Internship record successfully deleted # " .input('id');
-       // DB::delete('delete from internships where id = ?' ,[$id]);
-       // echo "sucessfully deleted ";
+       
     }
 }
